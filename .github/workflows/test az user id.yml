@@ -30,4 +30,4 @@ jobs:
       - name: Verify Azure Identity and Subscription
         run: |
           az account show
-          az ad sp show --id "${{ vars.CLIENT_ID }}" --query "{displayName:displayName, appId:appId}" -o table || true
+          az ad sp show --id "${{ secrets.CLIENT_ID }}" --query "{displayName:displayName, appId:appId}" -o table || true
