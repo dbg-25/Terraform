@@ -15,7 +15,7 @@ jobs:
 
       - name: Verify OIDC Variables Are Populated
         run: |
-          if [ -z "${{ secrets.CLIENT_ID }}" ]; then echo "Error: CLIENT_ID is empty"; exit 1; fi
+          if [ -z "${{ secrets.AZURE_CLIENT_ID }}" ]; then echo "Error: AZURE_CLIENT_ID is empty"; exit 1; fi
           if [ -z "${{ secrets.AZURE_TENANT_ID }}" ]; then echo "Error: AZURE_TENANT_ID is empty"; exit 1; fi
           if [ -z "${{ secrets.AZURE_SUBSCRIPTION_ID }}" ]; then echo "Error: AZURE_SUBSCRIPTION_ID is empty"; exit 1; fi
 
@@ -23,11 +23,11 @@ jobs:
       - name: Login to Azure via OIDC
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.CLIENT_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Verify Azure Identity and Subscription
         run: |
           az account show
-          az ad sp show --id "${{ secrets.CLIENT_ID }}" --query "{displayName:displayName, appId:appId}" -o table || true
+          az ad sp show --id "${{ secrets.AZURE_CLIENT_ID }}" --query "{displayName:displayName, appId:appId}" -o table || true
