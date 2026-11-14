@@ -14,6 +14,7 @@ jobs:
       - name: Login to Azure via OIDC
         uses: azure/login@v2
         with:
+          Auth-Type: IDENTITY
           client-id: ${{ env.AZURE_CLIENT_ID }}
           tenant-id: ${{ env.AZURE_TENANT_ID }}
           subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
