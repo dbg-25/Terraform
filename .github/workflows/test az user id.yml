@@ -10,11 +10,17 @@ permissions:
 jobs:
   test-oidc-login:
     runs-on: ubuntu-latest
+    environment: production
     steps:
+      - name: Verify OIDC Variables Are Populated
+        run: |
+          if [ -z "${{ vars.CLIENT_ID }}" ]; then echo "Error: CLIENT_ID is empty"; exit 1; fi
+          if [ -z "${{ vars.AZURE_TENANT_ID }}" ]; then echo "Error: AZURE_TENANT_ID is empty"; exit 1; fi
+          if [ -z "${{ vars.AZURE_SUBSCRIPTION_ID }}" ]; then echo "Error: AZURE_SUBSCRIPTION_ID is empty"; exit 1; fi
+
       - name: Login to Azure via OIDC
         uses: azure/login@v2
         with:
-          Auth-Type: IDENTITY
           client-id: ${{ vars.CLIENT_ID }}
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
@@ -22,4 +28,4 @@ jobs:
       - name: Verify Azure Identity and Subscription
         run: |
           az account show
-          az ad signed-in-user show || echo "Authenticated via Managed Identity (no user profile)"
+          az ad sp show --id "${{ vars.CLIENT_ID }}" --query "{displayName:displayName, appId:appId}" -o table || true
