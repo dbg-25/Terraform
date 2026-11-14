@@ -10,7 +10,6 @@ permissions:
 jobs:
   test-oidc-login:
     runs-on: ubuntu-latest
-    environment: Terraform Azure
     steps:
 
       - name: Verify OIDC Variables Are Populated
