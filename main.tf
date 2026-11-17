@@ -21,17 +21,18 @@ provider "azurerm" {
 }
 
 
-#resource group creation
+# Resource Group Creation
 resource "azurerm_resource_group" "Up-andAway" {
-    name = "Up-andAway"
+    name     = "Up-andAway"
     location = "Canada Central"
-    tags = "ToBeDeleted"
+    tags     = {
+      Environment = "ToBeDeleted"
+    }
 }
 
 resource "azurerm_virtual_network" "MyVnet" {
-    name = "MyVnet"
+    name                = "MyVnet"
     resource_group_name = azurerm_resource_group.Up-andAway.name
-    location = azurerm_resource_group.Up-andAway.location
-    address_space = [ "10.10.10.0/24" ]
+    location            = azurerm_resource_group.Up-andAway.location
+    address_space       = [ "10.10.10.0/24" ]
 }
-
