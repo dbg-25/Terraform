@@ -7,6 +7,12 @@ terraform {
       version = "=5.0.0"
     }
   }
+  backend "remote" {
+    resource_group_name  = "terraformPipelineObjects"
+    storage_account_name = "terraformstorage36745495"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
 }
 
 # Configure the Microsoft Azure Provider
