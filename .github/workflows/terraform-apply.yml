@@ -4,8 +4,13 @@ on:
         branches:
             - main
         types: [closed]
+permissions:
+        contents: read
+        actions: read
+        id-token: write   # Required to request the OIDC JWT token
 jobs:
     terraform-apply:
+        environment: Terraform Azure
         name: 'Terraform Apply'
         runs-on: ubuntu-latest
         if: github.event.pull_request.merged == true
