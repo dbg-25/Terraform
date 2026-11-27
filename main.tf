@@ -29,9 +29,3 @@ resource "azurerm_resource_group" "Up-andAway" {
   }
 }
 
-resource "azurerm_virtual_network" "MyVnet" {
-  name                = "MyVnet"
-  resource_group_name = azurerm_resource_group.Up-andAway.name
-  location            = azurerm_resource_group.Up-andAway.location
-  address_space       = ["10.10.10.0/24"]
-}
