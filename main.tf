@@ -21,8 +21,8 @@ provider "azurerm" {
 }
 
 # Resource Group Creation
-resource "azurerm_resource_group" "Up-andAway" {
-  name     = "Up-andAway"
+resource "azurerm_resource_group" "UpAndAway" {
+  name     = "UpAndAway"
   location = "Canada Central"
   tags = {
     Environment = "ToBeDeleted"
