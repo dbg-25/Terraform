@@ -9,6 +9,7 @@ on:
 permissions:
         contents: read
         actions: read
+        id-token: write   # Required to request the OIDC JWT token
 
 jobs:
     terraform-unit-tests:
