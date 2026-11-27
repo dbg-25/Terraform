@@ -1,12 +1,10 @@
-name: 'Terraform Test'
+name: 'Terraform Plan'
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - VnetCreation
+
     
 permissions:
         contents: read
