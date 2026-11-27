@@ -15,6 +15,8 @@ jobs:
     terraform-unit-tests:
         name: 'Terraform Unit Tests'
         runs-on: ubuntu-latest
+        environment: Terraform Azure
+
         steps:
             - name: Login to Azure via OIDC
               uses: azure/login@v2
